@@ -59,11 +59,11 @@ services:
       AWS_SECRET_ACCESS_KEY: ${MINIO_SECRET_ACCESS_KEY}
       MLFLOW_S3_ENDPOINT_URL: http://minio:9000
       MLFLOW_S3_IGNORE_TLS: "true"
-      MLFLOW_BACKEND_STORE_URI: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      MLFLOW_BACKEND_STORE_URI: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/${MLFLOW_DB}
       GUNICORN_CMD_ARGS: "--timeout 300 --workers 4 --log-level debug"
     command: >
       mlflow server
-      --backend-store-uri postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      --backend-store-uri postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/${MLFLOW_DB}
       --host 0.0.0.0
       --serve-artifacts
       --artifacts-destination s3://mlflow
